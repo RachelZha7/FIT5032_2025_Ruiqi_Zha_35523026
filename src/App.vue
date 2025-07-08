@@ -1,6 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import JSON from './components/JSON.vue'
+import Form from "./components/Form.vue";
 </script>
 
 <template>
@@ -12,7 +13,8 @@ import JSON from './components/JSON.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a> -->
 
-    <JSON />
+    <!--<JSON />-->
+    <Form />
   </div>
 </template>
 
