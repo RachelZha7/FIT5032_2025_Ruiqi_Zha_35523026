@@ -5,7 +5,7 @@
         <h1 class="text-center">User Information Form</h1>
         <form @submit.prevent="submitForm">
           <div class="row mb-3">
-            <div class="col-12 col-sm-6 col-md-6">
+            <div class="col-sm-6 col-md-6">
               <label for="username" class="form-label">Username</label>
               <input type="text" class="form-control" id="username"
                 @blur="() => validateName(true)"
@@ -85,7 +85,7 @@
           </div>
         </form>
 
-        <div class="row mt-5" v-if="submittedCards.length">
+        <!-- <div class="row mt-5" v-if="submittedCards.length">
             <div class="d-flex flex-wrap justify-content-start">
                 <div
                 v-for="(card, index) in submittedCards"
@@ -105,7 +105,28 @@
                 </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+        <DataTable
+          :value="submittedCards"
+          class="mt-5"
+          stripedRows
+          paginator
+          :rows="5"
+          tableStyle="min-width: 100%"
+          v-if="submittedCards.length"
+        >
+          <Column field="username" header="Username" />
+          <Column field="password" header="Password" />
+          <Column field="isAustralian" header="Australian Resident">
+            <template #body="slotProps">
+              {{ slotProps.data.isAustralian ? 'true' : 'false' }}
+            </template>
+          </Column>
+          <Column field="gender" header="Gender" />
+          <Column field="reason" header="Reason" />
+        </DataTable>
+
 
       </div>
     </div>
@@ -114,6 +135,9 @@
 
 <script setup>
 import { ref } from 'vue';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import 'primeicons/primeicons.css'; 
   
 const formData = ref({
     username: '',
